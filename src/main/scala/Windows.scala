@@ -42,7 +42,8 @@ object Windows{
     empSalary.agg(avg(empSalary("salary")), max(empSalary("salary"))).show()
     empSalary.withColumn("salary1",lag("salary",1,1000).over(byDepName)).show()
     empSalary.withColumn("salary1",lead("salary",1,1000).over(byDepName)).show()
-
+    val temp = empSalary.groupBy("depName").pivot("salary").count()
+    temp.show()
 
   }
 }
